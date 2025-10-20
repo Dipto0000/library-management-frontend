@@ -1,4 +1,5 @@
 export type Book = { 
+    _id: string;
     title: string;
     author: string;
     genre?: string;
@@ -10,7 +11,8 @@ export type Book = {
     updatedAt?: string;
   };
   
-  export type BorrowRecord = {
+export type BorrowRecord = {
+    _id: string;
     bookId: string;
     quantity: number;
     dueDate: string; // ISO
