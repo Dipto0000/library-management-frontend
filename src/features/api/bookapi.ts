@@ -21,9 +21,12 @@ export const booksApi = createApi({
   }),
   tagTypes: ["Books", "Book", "BorrowSummary"],
   endpoints: (build) => ({
-    // 📚 Books
+    
     getBooks: build.query<Book[], void>({
       query: () => "/books",
+      transformResponse: (response: { success: boolean; message: string; data: Book[] }) => {
+        return response.data;
+      },
       providesTags: (result) =>
         result
           ? [
@@ -35,6 +38,9 @@ export const booksApi = createApi({
 
     getBook: build.query<Book, string>({
       query: (id) => `/books/${id}`,
+      transformResponse: (response: { success: boolean; message: string; data: Book }) => {
+        return response.data;
+      },
       providesTags: (result, error, id) => [{ type: "Book", id }],
     }),
 
@@ -69,10 +75,11 @@ export const booksApi = createApi({
 
     // Borrow
     borrowBook: build.mutation<{ success: boolean }, BorrowRequest>({
-      query: (payload) => ({
-        url: "/borrow",
-        method: "POST",
-        body: payload, 
+    
+      query: (data) => ({
+        url: '/borrow',
+        method: 'POST',
+        body: data,
       }),
       invalidatesTags: [
         { type: "Books", id: "LIST" },
@@ -82,6 +89,15 @@ export const booksApi = createApi({
 
     getBorrowSummary: build.query<BorrowSummaryRow[], void>({
       query: () => "/borrow",
+      transformResponse: (response: { success: boolean; message: string; data: { book: Book, totalQuantity: number }[] }) => {
+        return response.data.map(item => ({
+          
+          bookId: item.book._id,
+          bookTitle: item.book.title,
+          isbn: item.book.isbn,
+          totalQuantity: item.totalQuantity,
+        }));
+      },
       providesTags: [{ type: "BorrowSummary", id: "LIST" }],
     }),
   }),

@@ -1,46 +1,30 @@
-import React from "react";
 import { NavLink } from "react-router";
 
-const Navbar: React.FC = () => {
-  const baseLinkStyle =
-    "px-4 py-2 rounded-md transition-colors duration-200";
-  const activeStyle =
-    "bg-blue-600 text-white";
-  const inactiveStyle =
-    "text-gray-700 hover:bg-blue-100";
+const Navbar = () => {
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+      isActive ? "text-white bg-blue-600" : "text-gray-700 hover:bg-gray-100"
+    }`;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-14">
-        <div className="text-xl font-semibold text-blue-700">
-          📚 Library System
-        </div>
+    <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-14">
+        {/* Logo / Brand */}
+        <NavLink to="/" className="text-lg font-semibold text-blue-700">
+          Library Management
+        </NavLink>
 
-        <div className="space-x-2">
-          <NavLink
-            to="/books"
-            className={({ isActive }) =>
-              `${baseLinkStyle} ${isActive ? activeStyle : inactiveStyle}`
-            }
-          >
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-3">
+          <NavLink to="/books" className={navLinkClass}>
             All Books
           </NavLink>
 
-          <NavLink
-            to="/create-book"
-            className={({ isActive }) =>
-              `${baseLinkStyle} ${isActive ? activeStyle : inactiveStyle}`
-            }
-          >
+          <NavLink to="/create-book" className={navLinkClass}>
             Add Book
           </NavLink>
 
-          <NavLink
-            to="/borrow-summary"
-            className={({ isActive }) =>
-              `${baseLinkStyle} ${isActive ? activeStyle : inactiveStyle}`
-            }
-          >
+          <NavLink to="/borrow-summary" className={navLinkClass}>
             Borrow Summary
           </NavLink>
         </div>
