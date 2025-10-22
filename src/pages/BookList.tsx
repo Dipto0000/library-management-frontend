@@ -5,7 +5,7 @@ import type { Book } from '../types';
 import { useDeleteBookMutation, useGetBooksQuery } from '@/features/api/bookapi';
 
 export default function BooksList() {
-  const { data: books, isLoading, isError, error } = useGetBooksQuery();
+  const { data: books, isLoading, isError } = useGetBooksQuery();
   const [deleteBook, { isLoading: deleting }] = useDeleteBookMutation();
   const navigate = useNavigate();
 

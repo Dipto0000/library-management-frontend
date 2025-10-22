@@ -41,7 +41,7 @@ export const booksApi = createApi({
       transformResponse: (response: { success: boolean; message: string; data: Book }) => {
         return response.data;
       },
-      providesTags: (result, error, id) => [{ type: "Book", id }],
+      providesTags: (_result, _error, id) => [{ type: "Book", id }],
     }),
 
     createBook: build.mutation<Book, Partial<Book>>({
@@ -59,7 +59,7 @@ export const booksApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_result, _error, { id }) => [
         { type: "Book", id },
         { type: "Books", id: "LIST" },
       ],
