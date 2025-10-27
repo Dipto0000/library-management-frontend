@@ -4,7 +4,7 @@ import type { Book } from "../../types";
 type BorrowRequest = {
   bookId: string;
   quantity: number;
-  dueDate: string; // ISO string
+  dueDate: string;
 };
 
 type BorrowSummaryRow = {
@@ -17,7 +17,7 @@ type BorrowSummaryRow = {
 export const booksApi = createApi({
   reducerPath: "booksApi",
   baseQuery: fetchBaseQuery({
-    baseUrl:"http://localhost:3000/api",
+    baseUrl:"https://library-backend-olive.vercel.app/api",
   }),
   tagTypes: ["Books", "Book", "BorrowSummary"],
   endpoints: (build) => ({

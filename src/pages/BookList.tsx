@@ -17,7 +17,7 @@ export default function BooksList() {
     if (!ok) return;
     try {
       await deleteBook(id).unwrap();
-      // RTK query invalidation will refresh list
+      
     } catch (err) {
       alert('Failed to delete');
     }

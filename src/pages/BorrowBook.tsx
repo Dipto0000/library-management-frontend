@@ -12,7 +12,7 @@ export default function BorrowBook() {
   const [quantity, setQuantity] = useState(1);
   const [dueDate, setDueDate] = useState(() => {
     const d = new Date();
-    d.setDate(d.getDate() + 7); // default +7 days
+    d.setDate(d.getDate() + 7); 
     return d.toISOString().slice(0, 10);
   });
 

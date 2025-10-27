@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
         children: [
             {
               index: true,
-              Component: BooksList, // Default landing page
+              Component: BooksList,
             },
             {
               path: "books",
